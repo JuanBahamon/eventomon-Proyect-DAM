@@ -1,0 +1,7 @@
+{
+  "name": "eventomon-proyect-DAM",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
