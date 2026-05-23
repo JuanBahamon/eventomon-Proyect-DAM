@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { IonApp, setupIonicReact } from '@ionic/react';
 import RutasApp from './routes/RutasApp';
+import { ProveedorAuth } from './context/AuthContext';
 
 import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
@@ -25,7 +26,9 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <IonApp>
-      <RutasApp />
+      <ProveedorAuth>
+        <RutasApp />
+      </ProveedorAuth>
     </IonApp>
   </React.StrictMode>
 );
