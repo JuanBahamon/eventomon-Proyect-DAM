@@ -4,6 +4,7 @@ import { IonApp, setupIonicReact } from '@ionic/react';
 import AppRoutes from './routes/RutasApp';
 import { AuthProvider } from './context/AuthContext';
 import { EventsProvider } from './context/EventsContext';
+import { CartProvider } from './context/CartContext';
 
 import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
@@ -21,12 +22,7 @@ import './theme/global.scss';
 
 setupIonicReact();
 
-const container = document.getElementById('root');
-
-if (!container) {
-  throw new Error('No se encontró el elemento root');
-}
-
+const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);
 
 root.render(
@@ -34,7 +30,9 @@ root.render(
     <IonApp>
       <AuthProvider>
         <EventsProvider>
-          <AppRoutes />
+          <CartProvider>
+            <AppRoutes />
+          </CartProvider>
         </EventsProvider>
       </AuthProvider>
     </IonApp>

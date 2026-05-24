@@ -4,7 +4,7 @@ import {
   IonButton, IonSpinner
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
-import { UseAuth } from '../../hooks/UseAuth';
+import { useAuth } from '../../hooks/UseAuth';
 import styles from './Registro.module.scss';
 
 const Registro: React.FC = () => {
@@ -12,7 +12,7 @@ const Registro: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const { registrar, cargando } = UseAuth();
+  const { register, loading } = useAuth();
   const history = useHistory();
 
   const handleRegistro = async () => {
@@ -24,8 +24,8 @@ const Registro: React.FC = () => {
       setError('La contraseña debe tener al menos 6 caracteres');
       return;
     }
-    const resultado = await registrar(nombre, email, password);
-    if (resultado.exito) {
+    const resultado = await register(nombre, email, password);
+    if (resultado.success) {
       window.location.href = '/app/inicio';
     } else {
       setError(resultado.error || 'Error desconocido');
@@ -78,9 +78,9 @@ const Registro: React.FC = () => {
               className={styles.botonPrimario}
               expand="block"
               onClick={handleRegistro}
-              disabled={cargando}
+              disabled={loading}
             >
-              {cargando ? <IonSpinner name="crescent" /> : 'Crear cuenta'}
+              {loading ? <IonSpinner name="crescent" /> : 'Crear cuenta'}
             </IonButton>
 
             <p className={styles.textoLink}>

@@ -4,14 +4,14 @@ import {
   IonButton, IonSpinner
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
-import { UseAuth } from '../../hooks/UseAuth';
+import { useAuth } from '../../hooks/UseAuth';
 import styles from './Ingreso.module.scss';
 
 const Ingreso: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const { ingresar, cargando } = UseAuth();
+  const { login, loading } = useAuth();
   const history = useHistory();
 
   const handleIngreso = async () => {
@@ -19,8 +19,8 @@ const Ingreso: React.FC = () => {
       setError('Completa todos los campos');
       return;
     }
-    const resultado = await ingresar(email, password);
-    if (resultado.exito) {
+    const resultado = await login(email, password);
+    if (resultado.success) {
       window.location.href = '/app/inicio';
     } else {
       setError('Correo o contraseña incorrectos');
@@ -63,9 +63,9 @@ const Ingreso: React.FC = () => {
               className={styles.botonPrimario}
               expand="block"
               onClick={handleIngreso}
-              disabled={cargando}
+              disabled={loading}
             >
-              {cargando ? <IonSpinner name="crescent" /> : 'Ingresar'}
+              {loading ? <IonSpinner name="crescent" /> : 'Ingresar'}
             </IonButton>
 
             <p className={styles.textoLink}>

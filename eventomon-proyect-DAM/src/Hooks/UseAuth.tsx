@@ -1,116 +1,51 @@
 import { useState } from 'react';
-
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  AuthError
-} from 'firebase/auth';
-
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, AuthError } from 'firebase/auth';
 import { ref, set } from 'firebase/database';
-
 import { auth, db } from '../helpers/Firebase';
 
-interface ResultadoAuth {
-  exito: boolean;
+interface AuthResult {
+  success: boolean;
   error?: string;
 }
 
-export const UseAuth = () => {
+export const useAuth = () => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const [cargando, setCargando] = useState<boolean>(false);
-
-  const registrar = async (
-    nombre: string,
-    email: string,
-    password: string
-  ): Promise<ResultadoAuth> => {
-
-    setCargando(true);
-
+  const register = async (name: string, email: string, password: string): Promise<AuthResult> => {
+    setLoading(true);
     try {
-
-      const credencial = await createUserWithEmailAndPassword(
-        auth,
+      const credential = await createUserWithEmailAndPassword(auth, email, password);
+      await set(ref(db, `users/${credential.user.uid}`), {
+        name,
         email,
-        password
-      );
-
-      await set(
-        ref(db, `usuarios/${credencial.user.uid}`),
-        {
-          nombre,
-          email,
-          rol: 'usuario',
-          premium: false,
-          asistidos: 0,
-          proximos: 0,
-          guardados: 0,
-          creadoEn: new Date().toISOString(),
-        }
-      );
-
-      return {
-        exito: true
-      };
-
+        role: 'user',
+        premium: false,
+        attended: 0,
+        upcoming: 0,
+        saved: 0,
+        createdAt: new Date().toISOString(),
+      });
+      return { success: true };
     } catch (e) {
-
-      console.error(e);
-
       const error = e as AuthError;
-
-      return {
-        exito: false,
-        error: error.message
-      };
-
+      return { success: false, error: error.message };
     } finally {
-
-      setCargando(false);
-
+      setLoading(false);
     }
   };
 
-  const ingresar = async (
-    email: string,
-    password: string
-  ): Promise<ResultadoAuth> => {
-
-    setCargando(true);
-
+  const login = async (email: string, password: string): Promise<AuthResult> => {
+    setLoading(true);
     try {
-
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      return {
-        exito: true
-      };
-
+      await signInWithEmailAndPassword(auth, email, password);
+      return { success: true };
     } catch (e) {
-
-      console.error(e);
-
       const error = e as AuthError;
-
-      return {
-        exito: false,
-        error: error.message
-      };
-
+      return { success: false, error: error.message };
     } finally {
-
-      setCargando(false);
-
+      setLoading(false);
     }
   };
 
-  return {
-    registrar,
-    ingresar,
-    cargando
-  };
+  return { register, login, loading };
 };
