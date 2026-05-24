@@ -26,9 +26,9 @@ const Registro: React.FC = () => {
     }
     const resultado = await registrar(nombre, email, password);
     if (resultado.exito) {
-      history.replace('/app/inicio');
+      window.location.href = '/app/inicio';
     } else {
-      setError('Error al registrar. Intenta con otro correo');
+      setError(resultado.error || 'Error desconocido');
     }
   };
 

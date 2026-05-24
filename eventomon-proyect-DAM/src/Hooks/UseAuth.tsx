@@ -1,10 +1,13 @@
 import { useState } from 'react';
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   AuthError
 } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+
+import { ref, set } from 'firebase/database';
+
 import { auth, db } from '../helpers/Firebase';
 
 interface ResultadoAuth {
@@ -13,6 +16,7 @@ interface ResultadoAuth {
 }
 
 export const UseAuth = () => {
+
   const [cargando, setCargando] = useState<boolean>(false);
 
   const registrar = async (
@@ -20,25 +24,50 @@ export const UseAuth = () => {
     email: string,
     password: string
   ): Promise<ResultadoAuth> => {
+
     setCargando(true);
+
     try {
-      const credencial = await createUserWithEmailAndPassword(auth, email, password);
-      await setDoc(doc(db, 'usuarios', credencial.user.uid), {
-        nombre,
+
+      const credencial = await createUserWithEmailAndPassword(
+        auth,
         email,
-        rol: 'usuario',
-        premium: false,
-        asistidos: 0,
-        proximos: 0,
-        guardados: 0,
-        creadoEn: new Date().toISOString(),
-      });
-      return { exito: true };
+        password
+      );
+
+      await set(
+        ref(db, `usuarios/${credencial.user.uid}`),
+        {
+          nombre,
+          email,
+          rol: 'usuario',
+          premium: false,
+          asistidos: 0,
+          proximos: 0,
+          guardados: 0,
+          creadoEn: new Date().toISOString(),
+        }
+      );
+
+      return {
+        exito: true
+      };
+
     } catch (e) {
+
+      console.error(e);
+
       const error = e as AuthError;
-      return { exito: false, error: error.message };
+
+      return {
+        exito: false,
+        error: error.message
+      };
+
     } finally {
+
       setCargando(false);
+
     }
   };
 
@@ -46,17 +75,42 @@ export const UseAuth = () => {
     email: string,
     password: string
   ): Promise<ResultadoAuth> => {
+
     setCargando(true);
+
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      return { exito: true };
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      return {
+        exito: true
+      };
+
     } catch (e) {
+
+      console.error(e);
+
       const error = e as AuthError;
-      return { exito: false, error: error.message };
+
+      return {
+        exito: false,
+        error: error.message
+      };
+
     } finally {
+
       setCargando(false);
+
     }
   };
 
-  return { registrar, ingresar, cargando };
+  return {
+    registrar,
+    ingresar,
+    cargando
+  };
 };
