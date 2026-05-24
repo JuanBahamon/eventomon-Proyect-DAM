@@ -14,7 +14,7 @@ const ContextoAuth = createContext<ContextoAuthTipo>({
   cerrarSesion: async () => {},
 });
 
-export const ProveedorAuth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [usuario, setUsuario] = useState<User | null>(null);
   const [cargando, setCargando] = useState<boolean>(true);
 
@@ -23,6 +23,7 @@ export const ProveedorAuth: React.FC<{ children: React.ReactNode }> = ({ childre
       setUsuario(user);
       setCargando(false);
     });
+
     return () => unsub();
   }, []);
 
