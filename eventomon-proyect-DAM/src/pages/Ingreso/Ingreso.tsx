@@ -21,7 +21,7 @@ const Ingreso: React.FC = () => {
     }
     const resultado = await ingresar(email, password);
     if (resultado.exito) {
-      history.replace('/app/inicio');
+      window.location.href = '/app/inicio';
     } else {
       setError('Correo o contraseña incorrectos');
     }
