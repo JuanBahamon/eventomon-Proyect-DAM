@@ -2,13 +2,13 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../helpers/Firebase';
 
-interface ContextoAuthTipo {
+interface AuthContextTipo {
   usuario: User | null;
   cargando: boolean;
   cerrarSesion: () => Promise<void>;
 }
 
-const ContextoAuth = createContext<ContextoAuthTipo>({
+const AuthContext = createContext<AuthContextTipo>({
   usuario: null,
   cargando: true,
   cerrarSesion: async () => {},
@@ -32,10 +32,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <ContextoAuth.Provider value={{ usuario, cargando, cerrarSesion }}>
+    <AuthContext.Provider value={{ usuario, cargando, cerrarSesion }}>
       {children}
-    </ContextoAuth.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export const usarContextoAuth = () => useContext(ContextoAuth);
+export const useAuthContext = () => useContext(AuthContext);
