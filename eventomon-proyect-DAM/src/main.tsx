@@ -1,8 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { IonApp, setupIonicReact } from '@ionic/react';
-import RutasApp from './routes/RutasApp';
-import { ProveedorAuth } from './context/AuthContext';
+import AppRoutes from './routes/RutasApp';
+import { AuthProvider } from './context/AuthContext';
+import { EventsProvider } from './context/EventsContext';
 
 import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
@@ -20,15 +21,22 @@ import './theme/global.scss';
 
 setupIonicReact();
 
-const container = document.getElementById('root') as HTMLElement;
+const container = document.getElementById('root');
+
+if (!container) {
+  throw new Error('No se encontró el elemento root');
+}
+
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
     <IonApp>
-      <ProveedorAuth>
-        <RutasApp />
-      </ProveedorAuth>
+      <AuthProvider>
+        <EventsProvider>
+          <AppRoutes />
+        </EventsProvider>
+      </AuthProvider>
     </IonApp>
   </React.StrictMode>
 );
