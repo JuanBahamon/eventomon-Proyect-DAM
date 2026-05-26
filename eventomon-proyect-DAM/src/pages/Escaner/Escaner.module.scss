@@ -1,181 +1,189 @@
 .content {
-  --background: var(--color-fondo);
+    --background: var(--color-fondo);
 }
 
 .header {
-  padding: 24px 20px 0;
-  text-align: center;
+    padding: 24px 20px 0;
+    text-align: center;
 }
 
 .title {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--color-texto);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-texto);
 }
 
 .subtitle {
-  font-size: 14px;
-  color: var(--color-texto-secundario);
-  margin-top: 4px;
+    font-size: 14px;
+    color: var(--color-texto-secundario);
+    margin-top: 4px;
 }
 
 .scannerArea {
-  margin: 32px auto;
-  width: 260px;
-  height: 260px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    margin: 32px auto;
+    width: 260px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .frame {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background: rgba(201, 168, 76, 0.05);
-  border-radius: 16px;
-  overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: rgba(201, 168, 76, 0.05);
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .corner {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border-color: var(--color-dorado);
-  border-style: solid;
-  border-width: 3px 0 0 3px;
-  top: 0;
-  left: 0;
-  border-radius: 4px 0 0 0;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-color: var(--color-dorado);
+    border-style: solid;
+    border-width: 3px 0 0 3px;
+    top: 0;
+    left: 0;
+    border-radius: 4px 0 0 0;
 }
 
 .cornerTR {
-  top: 0;
-  left: auto;
-  right: 0;
-  border-width: 3px 3px 0 0;
-  border-radius: 0 4px 0 0;
+    top: 0;
+    left: auto;
+    right: 0;
+    border-width: 3px 3px 0 0;
+    border-radius: 0 4px 0 0;
 }
 
 .cornerBL {
-  top: auto;
-  bottom: 0;
-  left: 0;
-  border-width: 0 0 3px 3px;
-  border-radius: 0 0 0 4px;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    border-width: 0 0 3px 3px;
+    border-radius: 0 0 0 4px;
 }
 
 .cornerBR {
-  top: auto;
-  bottom: 0;
-  left: auto;
-  right: 0;
-  border-width: 0 3px 3px 0;
-  border-radius: 0 0 4px 0;
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    border-width: 0 3px 3px 0;
+    border-radius: 0 0 4px 0;
 }
 
 .scanLine {
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  height: 2px;
-  background: var(--color-dorado);
-  top: 50%;
-  animation: scan 2s ease-in-out infinite;
-  box-shadow: 0 0 8px var(--color-dorado);
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 2px;
+    background: var(--color-dorado);
+    top: 50%;
+    animation: scan 2s ease-in-out infinite;
+    box-shadow: 0 0 8px var(--color-dorado);
 }
 
 @keyframes scan {
-  0% { top: 10%; }
-  50% { top: 90%; }
-  100% { top: 10%; }
+    0% {
+        top: 10%;
+    }
+
+    50% {
+        top: 90%;
+    }
+
+    100% {
+        top: 10%;
+    }
 }
 
 .scannedPhoto {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 16px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
 }
 
 .shakeAlert {
-  margin: 0 20px 12px;
-  background: rgba(201, 168, 76, 0.15);
-  border: 1px solid var(--color-dorado);
-  border-radius: 12px;
-  padding: 12px 16px;
-  color: var(--color-dorado);
-  font-size: 14px;
-  text-align: center;
-  font-weight: 600;
+    margin: 0 20px 12px;
+    background: rgba(201, 168, 76, 0.15);
+    border: 1px solid var(--color-dorado);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: var(--color-dorado);
+    font-size: 14px;
+    text-align: center;
+    font-weight: 600;
 }
 
 .successCard {
-  margin: 0 20px 20px;
-  background: rgba(0, 200, 100, 0.1);
-  border: 1px solid #00c864;
-  border-radius: 16px;
-  padding: 20px;
-  text-align: center;
+    margin: 0 20px 20px;
+    background: rgba(0, 200, 100, 0.1);
+    border: 1px solid #00c864;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
 }
 
 .successIcon {
-  font-size: 40px;
-  margin-bottom: 8px;
+    font-size: 40px;
+    margin-bottom: 8px;
 }
 
 .successText {
-  font-size: 16px;
-  font-weight: 700;
-  color: #00c864;
+    font-size: 16px;
+    font-weight: 700;
+    color: #00c864;
 }
 
 .successSub {
-  font-size: 13px;
-  color: var(--color-texto-secundario);
-  margin-top: 4px;
+    font-size: 13px;
+    color: var(--color-texto-secundario);
+    margin-top: 4px;
 }
 
 .errorCard {
-  margin: 0 20px 20px;
-  background: rgba(255, 68, 68, 0.1);
-  border: 1px solid #ff4444;
-  border-radius: 12px;
-  padding: 14px;
-  text-align: center;
+    margin: 0 20px 20px;
+    background: rgba(255, 68, 68, 0.1);
+    border: 1px solid #ff4444;
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
 }
 
 .errorText {
-  color: #ff4444;
-  font-size: 14px;
+    color: #ff4444;
+    font-size: 14px;
 }
 
 .scanBtn {
-  display: block;
-  margin: 0 auto 16px;
-  background: var(--color-dorado);
-  border: none;
-  border-radius: 16px;
-  padding: 16px 48px;
-  color: #000;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  min-width: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+    display: block;
+    margin: 0 auto 16px;
+    background: var(--color-dorado);
+    border: none;
+    border-radius: 16px;
+    padding: 16px 48px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 }
 
 .hint {
-  text-align: center;
-  color: var(--color-texto-secundario);
-  font-size: 13px;
-  padding: 0 32px;
+    text-align: center;
+    color: var(--color-texto-secundario);
+    font-size: 13px;
+    padding: 0 32px;
 }

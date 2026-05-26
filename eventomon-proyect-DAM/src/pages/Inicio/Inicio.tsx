@@ -28,7 +28,6 @@ const Inicio: React.FC = () => {
     <IonPage>
       <IonContent className={styles.content}>
 
-        {/* Header */}
         <div className={styles.header}>
           <div>
             <p className={styles.city}>MADRID · TODAY</p>
@@ -42,7 +41,6 @@ const Inicio: React.FC = () => {
           </button>
         </div>
 
-        {/* Search */}
         <div className={styles.searchContainer}>
           <IonSearchbar
             className={styles.searchbar}
@@ -52,7 +50,6 @@ const Inicio: React.FC = () => {
           />
         </div>
 
-        {/* Categories */}
         <div className={styles.categories}>
           {CATEGORIES.map((cat) => (
             <IonChip
