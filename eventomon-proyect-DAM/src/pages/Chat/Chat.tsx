@@ -17,7 +17,7 @@ interface Message {
 
 const Chat: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { usuario: user } = useAuthContext();
+  const { usuario } = useAuthContext();
   const { events } = useEvents();
   const history = useHistory();
 
@@ -52,12 +52,12 @@ const Chat: React.FC = () => {
   }, [messages]);
 
   const sendMessage = async () => {
-    if (!text.trim() || !user) return;
+    if (!text.trim() || !usuario) return;
     const messagesRef = ref(db, `chats/${id}/messages`);
     await push(messagesRef, {
       text: text.trim(),
-      userId: user.uid,
-      userName: user.email?.split('@')[0] ?? 'User',
+      userId: usuario.uid,
+      userName: usuario.email?.split('@')[0] ?? 'Usuario',
       timestamp: serverTimestamp(),
     });
     setText('');
@@ -70,16 +70,14 @@ const Chat: React.FC = () => {
   return (
     <IonPage>
       <IonContent className={styles.content}>
-        {/* Header */}
         <div className={styles.header}>
           <button className={styles.backBtn} onClick={() => history.goBack()}>←</button>
           <div className={styles.headerInfo}>
             <h2 className={styles.headerTitle}>{event?.title ?? 'Chat'}</h2>
-            <p className={styles.headerSub}>{event?.attendees ?? 0} attendees</p>
+            <p className={styles.headerSub}>{event?.attendees ?? 0} asistentes</p>
           </div>
         </div>
 
-        {/* Messages */}
         {loading ? (
           <div className={styles.loading}>
             <IonSpinner name="crescent" color="warning" />
@@ -87,10 +85,10 @@ const Chat: React.FC = () => {
         ) : (
           <div className={styles.messagesList}>
             {messages.length === 0 && (
-              <p className={styles.noMessages}>No messages yet. Be the first! 👋</p>
+              <p className={styles.noMessages}>Aún no hay mensajes. ¡Sé el primero! 👋</p>
             )}
             {messages.map((msg) => {
-              const isMe = msg.userId === user?.uid;
+              const isMe = msg.userId === usuario?.uid;
               return (
                 <div
                   key={msg.id}
@@ -114,21 +112,16 @@ const Chat: React.FC = () => {
         )}
       </IonContent>
 
-      {/* Input */}
       <IonFooter className={styles.footer}>
         <div className={styles.inputRow}>
           <input
             className={styles.input}
-            placeholder="Write a message..."
+            placeholder="Escribe un mensaje..."
             value={text}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <button
-            className={styles.sendBtn}
-            onClick={sendMessage}
-            disabled={!text.trim()}
-          >
+          <button className={styles.sendBtn} onClick={sendMessage} disabled={!text.trim()}>
             ➤
           </button>
         </div>

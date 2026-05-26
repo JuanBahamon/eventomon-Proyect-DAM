@@ -15,20 +15,20 @@ const MisEntradas: React.FC = () => {
   return (
     <IonPage>
       <IonContent className={styles.content}>
-        <h1 className={styles.title}>My Tickets</h1>
+        <h1 className={styles.title}>Mis entradas</h1>
 
         <div className={styles.tabs}>
           <button
             className={`${styles.tab} ${activeTab === 'upcoming' ? styles.tabActive : ''}`}
             onClick={() => setActiveTab('upcoming')}
           >
-            Upcoming
+            Próximos
           </button>
           <button
             className={`${styles.tab} ${activeTab === 'past' ? styles.tabActive : ''}`}
             onClick={() => setActiveTab('past')}
           >
-            Past
+            Pasados
           </button>
         </div>
 
@@ -53,7 +53,7 @@ const MisEntradas: React.FC = () => {
         </div>
 
         <div className={styles.chatsSection}>
-          <p className={styles.chatsLabel}>EVENT CHATS</p>
+          <p className={styles.chatsLabel}>CHATS DE EVENTO</p>
           {myTickets.map((event) => (
             <div
               key={event.id}
@@ -63,7 +63,7 @@ const MisEntradas: React.FC = () => {
               <div className={styles.chatIcon}>💬</div>
               <div className={styles.chatInfo}>
                 <p className={styles.chatTitle}>{event.title}</p>
-                <p className={styles.chatSub}>{event.attendees} attendees · 3 new messages</p>
+                <p className={styles.chatSub}>{event.attendees} asistentes · 3 nuevos mensajes</p>
               </div>
             </div>
           ))}

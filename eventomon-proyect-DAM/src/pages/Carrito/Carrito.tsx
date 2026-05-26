@@ -19,10 +19,10 @@ const Carrito: React.FC = () => {
     <IonPage>
       <IonContent className={styles.content}>
         <div className={styles.header}>
-          <h1 className={styles.title}>My Cart</h1>
+          <h1 className={styles.title}>Mi carrito</h1>
           {items.length > 0 && (
             <button className={styles.clearBtn} onClick={clearCart}>
-              Clear all
+              Limpiar todo
             </button>
           )}
         </div>
@@ -30,12 +30,9 @@ const Carrito: React.FC = () => {
         {items.length === 0 ? (
           <div className={styles.empty}>
             <p className={styles.emptyIcon}>🎟️</p>
-            <p className={styles.emptyText}>Your cart is empty</p>
-            <IonButton
-              className={styles.exploreBtn}
-              onClick={() => history.push('/app/inicio')}
-            >
-              Explore events
+            <p className={styles.emptyText}>Tu carrito está vacío</p>
+            <IonButton className={styles.exploreBtn} onClick={() => history.push('/app/inicio')}>
+              Explorar eventos
             </IonButton>
           </div>
         ) : (
@@ -74,7 +71,7 @@ const Carrito: React.FC = () => {
                 <span className={styles.footerTotal}>{formatPrice(total)}</span>
               </div>
               <IonButton className={styles.confirmBtn} expand="block" onClick={handleConfirm}>
-                Confirm purchase
+                Confirmar compra
               </IonButton>
             </div>
           </>

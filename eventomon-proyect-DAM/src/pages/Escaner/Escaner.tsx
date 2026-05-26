@@ -33,13 +33,13 @@ const Escaner: React.FC = () => {
     <IonPage>
       <IonContent className={styles.content}>
         <div className={styles.header}>
-          <h1 className={styles.title}>QR Scanner</h1>
-          <p className={styles.subtitle}>Escanea el código QR de tu ticket</p>
+          <h1 className={styles.title}>Escáner QR</h1>
+          <p className={styles.subtitle}>Escanea el código QR de tu entrada</p>
         </div>
 
         <div className={styles.scannerArea}>
           {photo ? (
-            <img src={photo} alt="scanned" className={styles.scannedPhoto} />
+            <img src={photo} alt="escaneado" className={styles.scannedPhoto} />
           ) : (
             <div className={styles.frame}>
               <div className={styles.corner} />
@@ -53,15 +53,15 @@ const Escaner: React.FC = () => {
 
         {isShaking && (
           <div className={styles.shakeAlert}>
-            Vibracion detectada resetear scanner
+            📳 ¡Agitación detectada — escáner reiniciado!
           </div>
         )}
 
         {scanned && (
           <div className={styles.successCard}>
             <p className={styles.successIcon}>✅</p>
-            <p className={styles.successText}>Ticket escaneado correctamente</p>
-            <p className={styles.successSub}>Agita el teléfono para volver a escanear</p>
+            <p className={styles.successText}>¡Entrada verificada correctamente!</p>
+            <p className={styles.successSub}>Agita el teléfono para escanear de nuevo</p>
           </div>
         )}
 
@@ -71,25 +71,16 @@ const Escaner: React.FC = () => {
           </div>
         )}
 
-        {/* Button */}
         {!scanned && (
-          <button
-            className={styles.scanBtn}
-            onClick={handleScan}
-            disabled={loading}
-          >
-            {loading ? (
-              <IonSpinner name="crescent" />
-            ) : (
-              'Abrir Camara'
-            )}
+          <button className={styles.scanBtn} onClick={handleScan} disabled={loading}>
+            {loading ? <IonSpinner name="crescent" /> : '📷 Abrir cámara'}
           </button>
         )}
 
         <p className={styles.hint}>
           {scanned
-            ? 'Agita para resetear el escaner'
-            : 'Apunta al código QR de tu ticket y presiona el botón para escanear'}
+            ? 'Agita para reiniciar'
+            : 'Apunta la cámara al código QR de tu entrada'}
         </p>
       </IonContent>
     </IonPage>

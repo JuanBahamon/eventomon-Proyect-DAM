@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { IonPage, IonContent, IonSearchbar, IonChip, IonSpinner, IonIcon } from '@ionic/react';
 import { notificationsOutline, qrCodeOutline } from 'ionicons/icons';
-import { useEvents, Event } from '../../context/EventsContext';
+import { useEvents } from '../../context/EventsContext';
 import { formatDate } from '../../helpers/FormatDate';
 import { formatPrice } from '../../helpers/FormatPrice';
 import { useHistory } from 'react-router-dom';
 import styles from './Inicio.module.scss';
 
-const CATEGORIES = ['All', 'Música', 'Deportes', 'Cultura', 'Nocturna', 'Gastronomía'];
+const CATEGORIES = ['Todo', 'Música', 'Deportes', 'Cultura', 'Nocturna', 'Gastronomía'];
 
 const Inicio: React.FC = () => {
   const { events, loading } = useEvents();
-  const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [activeCategory, setActiveCategory] = useState<string>('Todo');
   const [search, setSearch] = useState<string>('');
   const history = useHistory();
 
   const filtered = events.filter((e) => {
-    const matchCategory = activeCategory === 'All' || e.category === activeCategory;
+    const matchCategory = activeCategory === 'Todo' || e.category === activeCategory;
     const matchSearch = e.title.toLowerCase().includes(search.toLowerCase());
     return matchCategory && matchSearch;
   });
@@ -27,12 +27,11 @@ const Inicio: React.FC = () => {
   return (
     <IonPage>
       <IonContent className={styles.content}>
-
         <div className={styles.header}>
           <div>
-            <p className={styles.city}>MADRID · TODAY</p>
+            <p className={styles.city}>MADRID · HOY</p>
             <h1 className={styles.title}>
-              Discover <span className={styles.brand}>EVNT</span>
+              Descubre <span className={styles.brand}>EVNT</span>
             </h1>
           </div>
           <button className={styles.notifBtn}>
@@ -44,7 +43,7 @@ const Inicio: React.FC = () => {
         <div className={styles.searchContainer}>
           <IonSearchbar
             className={styles.searchbar}
-            placeholder="Search events, artists, places..."
+            placeholder="Buscar eventos, artistas, lugares..."
             value={search}
             onIonInput={(e) => setSearch(e.detail.value ?? '')}
           />
@@ -68,7 +67,6 @@ const Inicio: React.FC = () => {
           </div>
         ) : (
           <>
-            {/* Featured */}
             {featured && (
               <div
                 className={styles.featured}
@@ -77,7 +75,7 @@ const Inicio: React.FC = () => {
                 <img src={featured.image} alt={featured.title} className={styles.featuredImage} />
                 <div className={styles.featuredOverlay}>
                   <div className={styles.featuredTags}>
-                    <span className={styles.tagFeatured}>FEATURED</span>
+                    <span className={styles.tagFeatured}>DESTACADO</span>
                     <span className={styles.tagCategory}>{featured.category.toUpperCase()}</span>
                   </div>
                   <h2 className={styles.featuredTitle}>{featured.title}</h2>
@@ -86,18 +84,17 @@ const Inicio: React.FC = () => {
                       {formatDate(featured.date)} · {featured.city}
                     </span>
                     <span className={styles.featuredPrice}>
-                      from {formatPrice(featured.price)}
+                      desde {formatPrice(featured.price)}
                     </span>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Nearby */}
             <div className={styles.section}>
               <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>Upcoming near you</h2>
-                <span className={styles.seeAll}>SEE ALL</span>
+                <h2 className={styles.sectionTitle}>Próximos cerca de ti</h2>
+                <span className={styles.seeAll}>VER TODOS</span>
               </div>
               {nearby.map((event) => (
                 <div
@@ -119,14 +116,9 @@ const Inicio: React.FC = () => {
           </>
         )}
 
-        {/* FAB Scanner */}
-        <button
-          className={styles.fab}
-          onClick={() => history.push('/app/escaner')}
-        >
+        <button className={styles.fab} onClick={() => history.push('/app/escaner')}>
           <IonIcon icon={qrCodeOutline} />
         </button>
-
       </IonContent>
     </IonPage>
   );
