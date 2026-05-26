@@ -10,7 +10,6 @@ const MisEntradas: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'upcoming' | 'past'>('upcoming');
   const history = useHistory();
 
-  // Simulamos que los primeros 2 eventos son tickets comprados
   const myTickets = events.slice(0, 2);
 
   return (
@@ -18,7 +17,6 @@ const MisEntradas: React.FC = () => {
       <IonContent className={styles.content}>
         <h1 className={styles.title}>My Tickets</h1>
 
-        {/* Tabs */}
         <div className={styles.tabs}>
           <button
             className={`${styles.tab} ${activeTab === 'upcoming' ? styles.tabActive : ''}`}
@@ -34,7 +32,6 @@ const MisEntradas: React.FC = () => {
           </button>
         </div>
 
-        {/* Tickets */}
         <div className={styles.list}>
           {myTickets.map((event, index) => (
             <div
@@ -55,7 +52,6 @@ const MisEntradas: React.FC = () => {
           ))}
         </div>
 
-        {/* Chats de evento */}
         <div className={styles.chatsSection}>
           <p className={styles.chatsLabel}>EVENT CHATS</p>
           {myTickets.map((event) => (
