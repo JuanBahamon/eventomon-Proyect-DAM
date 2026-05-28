@@ -1,0 +1,168 @@
+.content {
+    --background: var(--color-fondo);
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    padding: 48px;
+}
+
+.notFound {
+    color: var(--color-texto-secundario);
+    text-align: center;
+    padding: 48px;
+}
+
+.hero {
+    position: relative;
+    height: 300px;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, var(--color-fondo) 100%);
+}
+
+.backBtn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.tagCategory {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(201, 168, 76, 0.2);
+    color: var(--color-dorado);
+    border: 1px solid var(--color-dorado);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+}
+
+.body {
+    padding: 0 20px 140px;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-texto);
+    margin-bottom: 20px;
+}
+
+.infoGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.infoItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.infoIcon {
+    color: var(--color-dorado);
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.infoLabel {
+    font-size: 11px;
+    color: var(--color-texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.infoValue {
+    font-size: 14px;
+    color: var(--color-texto);
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+.descriptionContainer {
+    margin-bottom: 20px;
+}
+
+.descriptionTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-texto);
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 14px;
+    color: var(--color-texto-secundario);
+    line-height: 1.6;
+}
+
+.chatBtn {
+    width: 100%;
+    padding: 14px;
+    background: var(--color-fondo-card);
+    border: 1px solid var(--color-borde);
+    border-radius: 12px;
+    color: var(--color-texto);
+    font-size: 14px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.footer {
+    position: fixed;
+    bottom: 56px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--color-fondo-card);
+    border-top: 1px solid var(--color-borde);
+}
+
+.footerLabel {
+    font-size: 12px;
+    color: var(--color-texto-secundario);
+}
+
+.footerPrice {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-dorado);
+}
+
+.buyBtn {
+    --background: var(--color-dorado);
+    --color: #000000;
+    --border-radius: 12px;
+    font-weight: 700;
+    height: 48px;
+    width: 160px;
+}
