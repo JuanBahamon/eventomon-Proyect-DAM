@@ -1,18 +1,34 @@
-import React from 'react';
-import { IonPage, IonContent, IonButton, IonIcon } from '@ionic/react';
+import React, { useState } from 'react';
+import { IonPage, IonContent, IonButton, IonIcon, IonToast } from '@ionic/react';
 import { trashOutline, addOutline, removeOutline } from 'ionicons/icons';
 import { useCart } from '../../context/CartContext';
 import { formatPrice } from '../../helpers/FormatPrice';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from "../../hooks/UseAuth";
 import styles from './Carrito.module.scss';
 
 const Carrito: React.FC = () => {
-  const { items, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, total } = useCart();
+  const { items, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, total, purchaseTickets } = useCart();
+  const { user } = useAuth();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState({ open: false, message: '', color: 'success' });
 
-  const handleConfirm = () => {
-    clearCart();
-    history.replace('/app/entradas');
+  const handleConfirm = async () => {
+    if (!user) {
+      setToast({ open: true, message: 'Debes iniciar sesión para comprar', color: 'danger' });
+      return;
+    }
+    setLoading(true);
+    try {
+      await purchaseTickets(user.uid); // ✅ guarda en Firebase y limpia el carrito
+      setToast({ open: true, message: '¡Compra realizada con éxito! 🎉', color: 'success' });
+      setTimeout(() => history.replace('/app/entradas'), 1200);
+    } catch (e) {
+      setToast({ open: true, message: 'Error al procesar la compra. Intenta de nuevo.', color: 'danger' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -70,12 +86,25 @@ const Carrito: React.FC = () => {
                 <span className={styles.footerLabel}>Total</span>
                 <span className={styles.footerTotal}>{formatPrice(total)}</span>
               </div>
-              <IonButton className={styles.confirmBtn} expand="block" onClick={handleConfirm}>
-                Confirmar compra
+              <IonButton
+                className={styles.confirmBtn}
+                expand="block"
+                onClick={handleConfirm}
+                disabled={loading}
+              >
+                {loading ? 'Procesando...' : 'Confirmar compra'}
               </IonButton>
             </div>
           </>
         )}
+
+        <IonToast
+          isOpen={toast.open}
+          message={toast.message}
+          duration={2000}
+          color={toast.color}
+          onDidDismiss={() => setToast({ ...toast, open: false })}
+        />
       </IonContent>
     </IonPage>
   );
