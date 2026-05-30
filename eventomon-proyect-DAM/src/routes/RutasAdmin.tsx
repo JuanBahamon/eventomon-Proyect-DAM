@@ -1,6 +1,7 @@
 import React from 'react';
 import { IonRouterOutlet, IonPage, IonContent } from '@ionic/react';
 import { Route, Redirect } from 'react-router-dom';
+import AdminEventos from '../pages/Admin/AdminEventos';
 
 const PanelAdmin: React.FC = () => (
     <IonPage>
@@ -13,8 +14,10 @@ const PanelAdmin: React.FC = () => (
 const RutasAdmin: React.FC = () => {
     return (
         <IonRouterOutlet>
-            <Route path="/admin/panel" component={PanelAdmin} exact />
-            <Redirect exact from="/admin" to="/admin/panel" />
+            <Route exact path="/admin/eventos" component={AdminEventos} />
+            <Route exact path="/admin">
+                <Redirect to="/admin/eventos" />
+            </Route>
         </IonRouterOutlet>
     );
 };

@@ -53,13 +53,13 @@ const Escaner: React.FC = () => {
 
         {isShaking && (
           <div className={styles.shakeAlert}>
-            📳 ¡Agitación detectada — escáner reiniciado!
+            ¡Agitación detectada — escáner reiniciado!
           </div>
         )}
 
         {scanned && (
           <div className={styles.successCard}>
-            <p className={styles.successIcon}>✅</p>
+            <p className={styles.successIcon}></p>
             <p className={styles.successText}>¡Entrada verificada correctamente!</p>
             <p className={styles.successSub}>Agita el teléfono para escanear de nuevo</p>
           </div>
@@ -73,7 +73,7 @@ const Escaner: React.FC = () => {
 
         {!scanned && (
           <button className={styles.scanBtn} onClick={handleScan} disabled={loading}>
-            {loading ? <IonSpinner name="crescent" /> : '📷 Abrir cámara'}
+            {loading ? <IonSpinner name="crescent" /> : 'Abrir cámara'}
           </button>
         )}
 
